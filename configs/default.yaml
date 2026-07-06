@@ -1,0 +1,43 @@
+# Dataset root with Train/ and Test/ folders.
+data_dir: "/path/to/HistoPoC"
+output_dir: "outputs/dg_pocformer"
+
+classes:
+  - "Chorionic_villi"
+  - "Decidual_tissue"
+  - "Hemorrhage"
+  - "Trophoblastic_tissue"
+
+seed: 42
+num_workers: 0
+img_size: 256
+batch_size: 8
+n_internal_folds: 5
+
+training:
+  epochs: 80
+  warmup_epochs: 10
+  learning_rate: 0.0003
+  patience: 10
+  weight_decay: 0.05
+  label_smoothing: 0.05
+  focal_gamma: 2.0
+  cgcr_lambda: 0.05
+  mixup_alpha: 0.3
+  use_class_weights: true
+  decidual_weight_boost: 3.0
+
+preprocessing:
+  use_macenko: true
+  stain_ref_img: ""   # optional; empty = first image in official Train split
+
+model:
+  d_fine: 48
+  d_coarse: 64
+  depth: 3
+  n_heads_fine: 4
+  n_heads_coarse: 4
+  n_heads_cross: 4
+  window_size: 4
+  head_hidden: 256
+  head_drop: 0.3
